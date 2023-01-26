@@ -42,7 +42,7 @@ mbed compile
 ```
 
 Program the target device with a Segger J-Link debug probe and
-[`sixtron_flash`](https://gitlab.com/catie_6tron/6tron-flash) tool:
+[`sixtron_flash`](https://github.com/catie-aq/6tron-flash) tool:
 ```shell
 sixtron_flash stm32h743zg BUILD/ZEST_CORE_STM32H743ZG/GCC_ARM/mbed_stm-stsafe-a110-example.elf
 ```
