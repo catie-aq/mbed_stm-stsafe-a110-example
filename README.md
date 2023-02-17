@@ -4,25 +4,26 @@ Mbed-OS example usage of STSafe-A110 from STM.
 ## Requirements
 ### Hardware requirements
 The following boards are required:
-- *List mbed_stm-stsafe-A110-example hardware requirements here*
+- Zest_Security_SecureElement
+- All Zest Core
 
 ### Software requirements
 mbed_stm-stsafe-A110-example makes use of the following libraries (automatically
 imported by `mbed deploy` or `mbed import`):
-- *List mbed_stm-stsafe-A110-example software requirements here*
+- [STSafe-A110](https://github.com/catie-aq/mbed_stm-stsafe-A110)
 
 ## Usage
 To clone **and** deploy the project in one command, use `mbed import` and skip to the
 target enabling instructions:
 ```shell
-mbed import https://gitlab.com/catie_6tron/mbed_stm-stsafe-a110-example.git mbed_stm-stsafe-a110-example
+mbed import https://github.com/catie-aq/mbed_stm-stsafe-a110-example.git mbed_stm-stsafe-a110-example
 ```
 
 Alternatively:
 
 - Clone to "mbed_stm-stsafe-a110-example" and enter it:
   ```shell
-  git clone https://gitlab.com/catie_6tron/mbed_stm-stsafe-a110-example.git mbed_stm-stsafe-a110-example
+  git clone https://github.com/catie-aq/mbed_stm-stsafe-a110-example.git mbed_stm-stsafe-a110-example
   cd mbed_stm-stsafe-a110-example
   ```
 
@@ -31,9 +32,16 @@ Alternatively:
   mbed deploy
   ```
 
-Enable the custom target:
+- Clone custom target repository if necessary:
+  ```shell
+  git clone YOUR_CUSTOM_TARGET_REPOSITORY your-custom-target
+  ```
+
+Define your target and toolchain:
 ```shell
-cp zest-core-stm32h743zg/custom_targets.json .
+cp your-custom-target/custom_targets.json . # In case of custom target
+mbed target {{cookiecutter.mbed_os_target}}
+mbed toolchain {{cookiecutter.toolchain}}
 ```
 
 Compile the project:
@@ -44,7 +52,7 @@ mbed compile
 Program the target device with a Segger J-Link debug probe and
 [`sixtron_flash`](https://github.com/catie-aq/6tron-flash) tool:
 ```shell
-sixtron_flash stm32h743zg BUILD/ZEST_CORE_STM32H743ZG/GCC_ARM/mbed_stm-stsafe-a110-example.elf
+sixtron_flash YOUR_CUSTOM_TARGET BUILD/YOUR_CUSTOM_TARGET/GCC_ARM/mbed_stm-stsafe-a110-example.elf
 ```
 
 Debug on the target device with the probe and Segger
