@@ -5,7 +5,7 @@ Mbed-OS example usage of STSafe-A110 from STM.
 ### Hardware requirements
 The following boards are required:
 - Zest_Security_SecureElement
-- All Zest Core
+- Any Zest Core
 
 ### Software requirements
 mbed_stm-stsafe-A110-example makes use of the following libraries (automatically
