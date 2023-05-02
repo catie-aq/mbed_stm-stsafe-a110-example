@@ -2,4 +2,9 @@
 projectfiles
 *.py*
 
+custom_targets.json
+GettingStarted.html
+mbed_config.h
+zest-core*
+.vscode
 # Do NOT ignore files below
