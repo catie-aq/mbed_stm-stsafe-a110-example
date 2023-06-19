@@ -3,7 +3,8 @@
         "*": {
             "stm-stsafe-A110.i2c-sda": "P1_I2C_SDA",
             "stm-stsafe-A110.i2c-scl": "P1_I2C_SCL",
-            "stm-stsafe-A110.reset": "P1_DIO1"
+            "stm-stsafe-A110.reset": "P1_DIO1",
+            "stm-stsafe-A110.debug-log": ""
         },
         "ZEST_CORE_STM32L4A6RG": {
             "stm-stsafe-A110.i2c-sda": "I2C1_SDA",
