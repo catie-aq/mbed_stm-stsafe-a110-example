@@ -26,25 +26,6 @@ int main()
         return (-1);
     }
 
-    /* Infinite loop */
-    //while (status_code == STSAFEA_OK)
-    //{
-        //led1 = 0;
-        //int i = 0;
-//
-        //if (stsafea110.wrap_unwrap(STSAFEA_KEY_SLOT_0) == 0) {
-        //    led1 = 1;
-        //} else {
-        //    for (i = 0; i < 10; i++) {
-        //        led1 = !led1;
-        //        ThisThread::sleep_for(HALF_PERIOD);
-        //    }
-        //}
-
-        /* Wait for push BUTTON_USER */
-//        while ((uint8_t)BSP_PB_GetState(BUTTON_USER) == BUTTON_RELEASED) {};
-    //}
-
     led1 = 0;
     status_code = stsafea110.pairing();
     if (status_code == STSAFEA_OK) {
@@ -62,6 +43,25 @@ int main()
             ThisThread::sleep_for(HALF_PERIOD);
         }
     }
+
+    /* Infinite loop */
+//while (status_code == STSAFEA_OK)
+//{
+    led1 = 0;
+    int i = 0;
+
+    if (stsafea110.wrap_unwrap(STSAFEA_KEY_SLOT_0) == 0) {
+        led1 = 1;
+    } else {
+        for (i = 0; i < 10; i++) {
+            led1 = !led1;
+            ThisThread::sleep_for(HALF_PERIOD);
+        }
+    }
+
+    /* Wait for push BUTTON_USER */
+//        while ((uint8_t)BSP_PB_GetState(BUTTON_USER) == BUTTON_RELEASED) {};
+//}
 
     return (0);
 
