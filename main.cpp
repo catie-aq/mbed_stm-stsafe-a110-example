@@ -32,7 +32,7 @@ void print_byte(uint8_t *key, int size_of_key)
 int main()
 {
     synchro = 0;
-    /* Create STSAFE-A's handle */
+    // StSafe Init
     status_code = stsafea110.init();
     if (status_code == STSAFEA_OK) {
         printf("\n\r\n\r\n\r\n\rSTSAFE-A110 initialized successfully\n\r");
@@ -63,17 +63,14 @@ int main()
     }
     printf("\n");
 
+    // Pairing
     led1 = 0;
     status_code = stsafea110.pairing(Host_MAC_Cipher_Key);
     if (status_code == STSAFEA_OK) {
          led1 = 1;
-#ifdef MBED_CONF_STM_STSAFE_A110_DEBUG_LOG
         printf("\n\r\n\r ------ Pairing succeeded ------ \n\r");
-#endif /* MBED_CONF_STM_STSAFE_A110_DEBUG_LOG */
     } else {
-#ifdef MBED_CONF_STM_STSAFE_A110_DEBUG_LOG
         printf("\n\r\n\r ----- Pairing Failed -----\n\r");
-#endif /* MBED_CONF_STM_STSAFE_A110_DEBUG_LOG */
         int i = 0;
         for (i = 0; i < 10; i++) {
             led1 = !led1;
@@ -89,56 +86,5 @@ int main()
     }
     print_byte(read_key, sizeof(read_key));
 
-    // Write data
-    synchro = 1;
-    printf("Write: %d\n", stsafea110.update_data_partition(2, data, sizeof(data)));
-    synchro = 0;
-    
-    for (unsigned int i = 0; i < sizeof(data); i++) {
-        printf("0x%X ", data[i]);
-    }
-    printf("\n");
-
-    // Read data
-    synchro = 1;
-    printf("Read: %d\n", stsafea110.read_data_partition(2, read_data, sizeof(read_data)));
-    synchro = 0;
-
-    for (unsigned int i = 0; i < sizeof(read_data); i++) {
-        printf("0x%X ", read_data[i]);
-    }
-    printf("\n");
-
-
-    /* Infinite loop */
-//while (status_code == STSAFEA_OK)
-//{
-//    led1 = 0;
-//    int i = 0;
-//
-//    if (stsafea110.wrap_unwrap(STSAFEA_KEY_SLOT_0) == 0) {
-//        led1 = 1;
-//    } else {
-//        for (i = 0; i < 10; i++) {
-//            led1 = !led1;
-//            ThisThread::sleep_for(HALF_PERIOD);
-//        }
-//    }
-//
-//    /* Wait for push BUTTON_USER */
-//        while ((uint8_t)BSP_PB_GetState(BUTTON_USER) == BUTTON_RELEASED) {};
-//}
-
     return (0);
-
-//
-//    while (true) {
-//        led1 = !led1;
-//        if (led1) {
-//            printf("Alive!\n");
-//        }
-//        ThisThread::sleep_for(HALF_PERIOD);
-//    }
-//
-//    return 0;
 }
