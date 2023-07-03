@@ -17,8 +17,8 @@ static STSafeA110 stsafea110;
 static uint8_t status_code;
 static uint8_t read_key[2 * STSAFEA_HOST_KEY_LENGTH];
 static uint8_t Host_MAC_Cipher_Key[2 * STSAFEA_HOST_KEY_LENGTH] = {
-        0x00,0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88,0x99,0xAA,0xBB,0xCC,0xDD,0xEE,0xFF,    /* Host MAC key */
-        0x11,0x11,0x22,0x22,0x33,0x33,0x44,0x44,0x55,0x55,0x66,0x66,0x77,0x77,0x88,0x88     /* Host cipher key */
+        0x7A, 0xE2, 0xD7, 0x31, 0x18, 0x58, 0x7F, 0x59, 0x6E, 0x05, 0xF5, 0x8E, 0x81, 0x1D, 0x54, 0xE7,    /* Host MAC key */
+        0xF8, 0x5C, 0xA8, 0x37, 0xBD, 0xF3, 0xF7, 0xCC, 0x5B, 0xC2, 0xE7, 0x7B, 0x4C, 0xC1, 0xBA, 0x6E     /* Host cipher key */
     };
 
 void print_byte(uint8_t *key, int size_of_key)
@@ -77,14 +77,14 @@ int main()
             ThisThread::sleep_for(HALF_PERIOD);
         }
     }
-    printf("Read partition 0: %d\n", stsafea110.read_data_partition(0, read_key, sizeof(read_key)));
-    printf("Is Key protected ? [");
-    if (read_key != Host_MAC_Cipher_Key) {
-        printf("True]\n");
-    } else {
-        printf("False]\n");
-    }
-    print_byte(read_key, sizeof(read_key));
+    //printf("Read partition 0: %d\n", stsafea110.read_data_partition(0, read_key, sizeof(read_key)));
+    //printf("Is Key protected ? [");
+    //if (read_key != Host_MAC_Cipher_Key) {
+    //    printf("True]\n");
+    //} else {
+    //    printf("False]\n");
+    //}
+    //print_byte(read_key, sizeof(read_key));
 
     return (0);
 }
