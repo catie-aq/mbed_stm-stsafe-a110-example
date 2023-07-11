@@ -35,8 +35,6 @@ void button_routine() {
     }
     synchro = 0;
 
-    ThisThread::sleep_for(100ms);
-
     // Read data
     uint8_t read_data[10];
     synchro = 1;
@@ -44,6 +42,17 @@ void button_routine() {
         return;
     }
     synchro = 0;
+
+    ThisThread::sleep_for(100ms);
+
+    if (!stsafea110.paired()) {
+        printf("-------- STSafe-A110 pairing! --------\n");
+        stsafea110.pairing(Host_MAC_Cipher_Key);
+        printf("--------- STSafe-A110 paired ---------\n");
+    }
+    else {
+        printf("----- STSafe-A110 Already paired -----\n");
+    }
 
 }
 
