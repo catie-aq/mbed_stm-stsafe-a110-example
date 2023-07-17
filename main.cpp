@@ -30,7 +30,9 @@ void button_routine() {
     // Write data
     uint8_t data[] = { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9 };
     synchro = 1;
-    if (stsafea110.update_data_partition(2, data, sizeof(data)) != STSAFEA_OK) {
+    status_code = stsafea110.update_data_partition(2, data, sizeof(data));
+    if (status_code != STSAFEA_OK) {
+        printf("[Write]: 0x%02X\n", status_code);
         return;
     }
     synchro = 0;
@@ -38,7 +40,9 @@ void button_routine() {
     // Read data
     uint8_t read_data[10];
     synchro = 1;
-    if (stsafea110.read_data_partition(2, read_data, sizeof(read_data)) != STSAFEA_OK) {
+    status_code = stsafea110.read_data_partition(2, read_data, sizeof(read_data));
+    if (status_code != STSAFEA_OK) {
+        printf("[Read]: 0x%02X\n", status_code);
         return;
     }
     synchro = 0;
@@ -53,6 +57,16 @@ void button_routine() {
     else {
         printf("----- STSafe-A110 Already paired -----\n");
     }
+
+    // Write data
+    uint8_t secure_data[] = { 0x9, 0x8, 0x7, 0x6, 0x5, 0x4, 0x3, 0x2, 0x1, 0x0 };
+    synchro = 1;
+    status_code = stsafea110.secure_update_data_partition(2, secure_data, sizeof(secure_data));
+    if (status_code != STSAFEA_OK) {
+        printf("[Secure Write]: 0x%02X\n", status_code);
+        return;
+    }
+    synchro = 0;
 
 }
 
